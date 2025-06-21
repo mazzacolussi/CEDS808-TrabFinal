@@ -1,20 +1,14 @@
 import os
 import pickle
 import logging
-import click
 from sklearn.pipeline import Pipeline
 from utils.transformers import BuildFeatures, Json2DF
 
 import warnings
 warnings.filterwarnings('ignore')
 
-
-@click.command()
 def main():
-    """Cria o binário final da pipeline para deploy."""
     logger = logging.getLogger(__name__)
-    log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-    logging.basicConfig(level=logging.INFO, format=log_fmt)
 
     logger.info('Iniciando criação da pipeline final do modelo.')
 
@@ -24,7 +18,7 @@ def main():
     json_to_df = Json2DF()
     cria_features = BuildFeatures()
 
-    logger.info('Lendo binários dos transformadores.')
+    logger.info('Lendo os binários.')
     seletor_1 = pickle.load(open(os.path.join(encoders_path_folder, 'seletor_1.pkl'), 'rb'))
     seletor_2 = pickle.load(open(os.path.join(encoders_path_folder, 'seletor_2.pkl'), 'rb'))
     fill_null = pickle.load(open(os.path.join(encoders_path_folder, 'features_fill_null.pkl'), 'rb'))
@@ -34,11 +28,11 @@ def main():
     encoder = pickle.load(open(os.path.join(encoders_path_folder, 'encoder.pkl'), 'rb'))
     conversor_float = pickle.load(open(os.path.join(encoders_path_folder, 'conversor_float.pkl'), 'rb'))
 
-    logger.info('Lendo modelo preditivo.')
+    logger.info('Lendo modelo o preditivo.')
     model_path = os.path.join('models', 'predictors', 'model.pkl')
     modelo = pickle.load(open(model_path, 'rb'))
 
-    logger.info('Montando pipeline final.')
+    logger.info('Construindo a pipeline final.')
 
     pipeline_list = [
         ('json_to_df', json_to_df),
@@ -68,4 +62,8 @@ def main():
 
 
 if __name__ == '__main__':
+   
+    log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    logging.basicConfig(level=logging.INFO, format=log_fmt)
+
     main()

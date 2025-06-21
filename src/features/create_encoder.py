@@ -1,7 +1,6 @@
 
 import os
 import pandas as pd
-import numpy as np
 import yaml
 import pickle
 import logging
@@ -10,7 +9,7 @@ import click
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import OrdinalEncoder
 from utils.transformers import Selector, FillStringMissing, NormalizeLowerString, BoolHandler, FillNull, ConverteFloat
-from utils.training_utils import find_specific_variables, get_features_attribute
+from utils.training_utils import find_specific_variables
 
 import warnings
 warnings.filterwarnings('ignore')
@@ -19,8 +18,6 @@ warnings.filterwarnings('ignore')
 @click.option('--configfile', default='feature_config.yaml', help='Arquivo descritivo das features', type=str)
 @click.option('--dataset_name', default='train.csv', help='Nome do dataset de treino', type=str)
 def main(configfile, dataset_name):
-    """Cria objetos de encoding para o modelo."""
-
     logger = logging.getLogger(__name__)
 
     logger.info('Iniciando a criação dos encoders')
@@ -98,6 +95,7 @@ def main(configfile, dataset_name):
 
     logger.info('Sucesso! Encoders criados')
     logger.info('Salvando os binários dos encoders')
+    os.makedirs(os.path.join('models', 'encoders'), exist_ok=True)
 
     pickle.dump(seletor_1, open('models/encoders/seletor_1.pkl', 'wb'))
     pickle.dump(seletor_2, open('models/encoders/seletor_2.pkl', 'wb'))
