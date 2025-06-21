@@ -53,7 +53,7 @@ def main(configfile, dataset_name):
         logger.info(f'{name}: {round(np.mean(scores), 4)} +/- {round(np.std(scores), 4)}')
 
     logger.info('Sucesso! Construindo o gráfico dos boxplots dos desempenho dos modelos')
-
+    os.makedirs(os.path.join('reports', 'visualization'))
 
     fig = plt.figure(figsize=(12, 8))
 
