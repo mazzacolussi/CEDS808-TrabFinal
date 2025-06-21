@@ -11,7 +11,7 @@ warnings.filterwarnings('ignore')
 
 
 @click.command()
-@click.option('--dataset_name', default='processed_dataset.csv', help='Nome do dataset interim', type=str)
+@click.option('--dataset_name', default='interim_dataset.csv', help='Nome do dataset interim', type=str)
 def main(dataset_name):
     logger = logging.getLogger(__name__)
 
