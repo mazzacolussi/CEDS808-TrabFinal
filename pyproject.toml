@@ -4,12 +4,12 @@ requires = ["setuptools>=64.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "meli-case"
+name = "CEDS-808"
 version = "0.0.1"
 authors = [
-  { name = "Suellen Sena da Silva", email = "suellendsena@gmail.com" }
+  { name = "Leonardo Mazzamboni Colussi", email = "mazzacolussi@gmail.com" }
 ]
-description = "Exemplo de projeto usando setuptools"
+description = "Trabalho final da disciplina CEDS808-ITA"
 
 
 [tool.setuptools]

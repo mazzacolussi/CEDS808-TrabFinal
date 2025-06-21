@@ -9,7 +9,7 @@ import warnings
 warnings.filterwarnings('ignore')
 
 @click.command()
-@click.option('--input_dataset_name', default='interim_dataset.csv', help='Nome do dataset interim', type=str)
+@click.option('--input_dataset_name', default='raw_dataset.csv', help='Nome do dataset raw', type=str)
 @click.option('--output_dataset_name', default='processed_dataset.csv', help='Nome do dataset processado', type=str)
 def main(input_dataset_name, output_dataset_name):
     logger = logging.getLogger(__name__)
@@ -34,11 +34,11 @@ def main(input_dataset_name, output_dataset_name):
     else:
         logger.warning("Coluna 'default' não encontrada na base.")
 
-    logger.info("Salvando a base interim.")
-    os.makedirs(os.path.join('data', 'interim'), exist_ok=True)
-    path_output = os.path.join('data', 'interim', output_dataset_name)
+    logger.info("Salvando a base processada.")
+    os.makedirs(os.path.join('data', 'processed'), exist_ok=True)
+    path_output = os.path.join('data', 'processed', output_dataset_name)
     df.to_csv(path_output, index=False)
-    logger.info("Sucesso! Base interim salva!")
+    logger.info("Sucesso! Base processada salva!")
 
 
 if __name__ == '__main__':

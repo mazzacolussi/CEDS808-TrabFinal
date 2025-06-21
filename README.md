@@ -1,10 +1,12 @@
-Case Campanha de Marketing Mercado Pago
+Trabalho Final da Disciplina CEDS-808 (ITA)
 
 ==================================================
 
-Este projeto tem como objetivo avaliar uma campanha de marketing relacionada a um novo produto do Mercado Crédito. A solução abrange todo o processo, desde o pré-processamento dos dados, análise descritiva, criação e seleção de *features*, separação dos conjuntos para treinamento de modelos, avaliação de técnicas de desbalanceamento de dados, validação cruzada, até a construção dos artefatos necessários para um eventual *deploy* em produção.
+Este projeto é referente ao trabalho final da disciplina 808 (Aprendizado de Máquina) do *Curso de Especialização em Data Science* (CEDS-ITA), ministrado pela professora Dra. Lilian Berton. Assim, o principal objetivo é realizar um desenvolvimento completo de um processo de modelagem de um *dataset* escolhido arbritariamente pelo aluno, seguindo alguns critérios pré-definidos na atividade.
 
-O objetivo consiste em desenvolver um modelo capaz de classificar se um cliente, após ser contatado por meio da campanha de marketing direto, aceitará ou não a oferta do novo produto de Mercado Crédito. 
+Então, o *dataset* escolhido foi o [*Bank Marketing*](https://archive.ics.uci.edu/dataset/222/bank+marketing) que se enquadra no contexto de mercado de crédito, em específico uma campanha de *marketing* de um banco português, cujo objetivo é avaliar se um determinado cliente é propenso a realizar um depósito a prazo. A solução a seguir abrange todo o processo, desde o pré-processamento dos dados, análise descritiva, criação e seleção de *features*, separação dos conjuntos para treinamento de modelos, avaliação de técnicas de desbalanceamento de dados, validação cruzada, até a construção dos artefatos necessários para um eventual *deploy* em produção.
+
+Sendo assim, este trabalho consiste em desenvolver um modelo capaz de classificar se um cliente, após ser contatado por meio da campanha de marketing direto, aceitará ou não a oferta do novo produto de Mercado Crédito por meio de modelos de aprendizado de máquina. 
 
 # Etapas de desenvolvimento
 
@@ -19,9 +21,12 @@ pip install -r requirements.txt
 A análise exploratória dos dados está disponível em [notebooks/01-EDA.ipynb](notebooks/01-EDA.ipynb).  
 Inicialmente, foi realizada uma análise de volumetria e univariada da base *raw*, com foco na identificação de amostras duplicadas, variáveis pouco informativas e oportunidades de criação de novas *features*. Em seguida, uma análise bivariada com a *target* e investigação de possíveis casos de *data leakage* que poderiam comprometer a imparcialidade dos modelos. Essa etapa foi essencial para orientar a construção da base processada, utilizada nas fases seguintes.
 
+**Nota:** Baixou-se os dados do [link](https://archive.ics.uci.edu/dataset/222/bank+marketing) (`bank-additional-full.csv`) e renomeando o arquivo como `raw_dataset.csv`, armazenando-o na pasta `data/raw`.
+
+
 ## 2. Geração da base processada
 
-A finalidade dessa etapa é a construção de uma base pronta para o início do desenvolvimento do modelo. Então, o processo resultante proporcionará uma base pronta para consumo.
+A finalidade dessa etapa é a construção de uma base pronta para o início do desenvolvimento do modelo, tratando duplicadas e possíveis inconsistências identificadas no processo de EDA. Então, o processo resultante proporcionará uma base pronta para consumo.
 
 ```bash
 python src/data/basic_process.py
@@ -31,7 +36,7 @@ A tabela resultante estará na pasta `data/processed`.
 
 ## 3. Geração da base interim
 
-O processo de criação de features será realizado nessa etapa, produzindo uma base pronta para a modelagem em `data/interim`. Para tal, o script de apoio está em [src/utils/transformers.py](src/utils/transformers.py), este servirá como um pacote interno do projeto, onde há classes auxiliares para a construção da pipeline completa de modelagem.
+O processo de criação de features será realizado nessa etapa, produzindo uma base pronta para a modelagem em `data/interim`. Para tal, o script de apoio está em [src/utils/transformers.py](src/utils/transformers.py), este servirá como um pacote interno do projeto, onde há classes auxiliares para a construção da *pipeline* completa de modelagem.
 
 ```bash
 python src/features/build_features.py
@@ -49,7 +54,7 @@ As bases estarão disponíveis na pasta `data/train_test`.
 
 ## 6. *Feature Selection*
 
-No processo de seleção de variáveis, foi utilizado o algoritmo **Boruta**, uma técnica baseada em florestas aleatórias que identifica de forma robusta as *features* mais relevantes para o modelo. Ao finalizar a execução, será gerado um arquivo das features selecionadas e rejeitadas ([features_selected.yaml](src/features/selected/features_selected.yaml))
+No processo de seleção de variáveis, foi utilizado o algoritmo **Boruta**, uma técnica baseada em significância estatística, dado um estimador pré-definido (nessa etapa utilizou *Random Forest*), que identifica de forma robusta as *features* mais relevantes para o modelo. Ao finalizar a execução, será gerado um arquivo das features selecionadas e rejeitadas ([features_selected.yaml](src/features/selected/features_selected.yaml))
 
 ```bash
 python src/features/feature_selection.py
@@ -65,14 +70,14 @@ python src/features/create_encoder.py
 
 ## 8. *Model selection*
 
-Os modelos *baseline* propostos nesta etapa foram: Decision Tree, Random Forest, Gradient Boosting Trees, AdaBoost, XGBoost e LightGBM. Essas escolhas foram feitas devido ao desempenho superior desses algoritmos em comparação com modelos paramétricos, além de sua maior flexibilidade. Esses modelos não exigem a normalização das features, nem demandam atenção especial à correlação entre as variáveis preditoras, entre outros pré-requisitos comuns em outras abordagens. Para a abordagem de classificação, foi utilizada a validação cruzada estratificada, considerando o desbalanceamento da variável target. Essa técnica garante que a proporção das classes seja preservada em cada divisão, proporcionando uma avaliação mais consistente e representativa do desempenho do modelo. Por fim, foi avaliado técnicas de balanceamento de dados como *Oversampling*, *Undersampling* e *SMOTE (Synthetic Minority Over-sampling Technique)*
+Os modelos *baseline* propostos nesta etapa foram: *Decision Tree*, *Random Forest*, *Gradient Boosting Trees*, *AdaBoost*, *XGBoost* e *LightGBM*. Essas escolhas foram feitas devido ao desempenho superior desses algoritmos em comparação com modelos paramétricos, além de sua maior flexibilidade. Esses modelos não exigem a normalização das features, nem demandam atenção especial à correlação entre as variáveis preditoras, entre outros pré-requisitos comuns em outras abordagens. Para a abordagem de classificação, foi utilizada a validação cruzada estratificada, considerando o desbalanceamento da variável *target*. Essa técnica garante que a proporção das classes seja preservada em cada divisão, proporcionando uma avaliação mais consistente e representativa do desempenho do modelo. Por fim, foi avaliado técnicas de balanceamento de dados como *Oversampling*, *Undersampling* e *SMOTE (Synthetic Minority Over-sampling Technique)*
 
-## 9. *Tunning* de hiperparâmetros
+## 9. *Tuning* de hiperparâmetros
 
 O modelo *baseline* de melhor desempenho identificado na etapa anterior foi selecionado para o processo de *tuning*. Para essa tarefa, utilizou-se o **Optuna**, este módulo permite personalizar a função objetivo a ser otimizada. Diferentemente dos métodos tradicionais de busca de hiperparâmetros, o **Optuna** realiza uma exploração inteligente do espaço de hiperparâmetros, por meio de otimização bayesiana, ajustando-se com base nos resultados empíricos das iterações anteriores para melhorar a iteração do momento.
 
 ```bash
-python src/models/tunning.py
+python src/models/tuning.py
 ```
 
 ## 10. *Model training*

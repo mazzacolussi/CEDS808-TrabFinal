@@ -11,12 +11,12 @@ warnings.filterwarnings('ignore')
 
 
 @click.command()
-@click.option('--dataset_name', default='processed_dataset.csv', help='Nome do dataset processado', type=str)
+@click.option('--dataset_name', default='processed_dataset.csv', help='Nome do dataset interim', type=str)
 def main(dataset_name):
     logger = logging.getLogger(__name__)
 
     logger.info('Iniciando o split da base - Classificação promoção')
-    df = pd.read_csv(os.path.join('data', 'processed', dataset_name))
+    df = pd.read_csv(os.path.join('data', 'interim', dataset_name))
     logger.info(f'Shape da base: {df.shape}')
 
     df_train, df_test, y_train, y_test = train_test_split(
@@ -29,6 +29,7 @@ def main(dataset_name):
     df_train = pd.concat([df_train, y_train.rename('y')], axis=1)
     df_test = pd.concat([df_test, y_test.rename('y')], axis=1)
 
+    os.makedirs(os.path.join('data', 'train_test'), exist_ok=True)
     logger.info(f'Salvando a base de treino. Shape {df_train.shape}.')
     df_train.to_csv(os.path.join('data', 'train_test', 'train.csv'), index=False)
 

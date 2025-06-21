@@ -1,5 +1,3 @@
-# Meli client data:
-
 age:
   descritiva: true
 
@@ -68,6 +66,7 @@ nr.employed:
 
 
 # Features built in BuildFeatures
+
 quarter: 
   descritiva: true
 
@@ -79,6 +78,7 @@ employment_status:
 
 was_contacted_before:
   descritiva: true
+
 
 # target feature
 
