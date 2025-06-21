@@ -1,6 +1,4 @@
-Trabalho Final da Disciplina CEDS-808 (ITA)
-
-==================================================
+# Trabalho Final da Disciplina CEDS-808 (ITA)
 
 Este projeto é referente ao trabalho final da disciplina 808 (Aprendizado de Máquina) do *Curso de Especialização em Data Science* (CEDS-ITA), ministrado pela professora Dra. Lilian Berton. Assim, o principal objetivo é realizar um desenvolvimento completo de um processo de modelagem de um *dataset* escolhido arbritariamente pelo aluno, seguindo alguns critérios pré-definidos na atividade.
 
@@ -71,6 +69,12 @@ python src/features/create_encoder.py
 ## 8. *Model selection*
 
 Os modelos *baseline* propostos nesta etapa foram: *Decision Tree*, *Random Forest*, *Gradient Boosting Trees*, *AdaBoost*, *XGBoost* e *LightGBM*. Essas escolhas foram feitas devido ao desempenho superior desses algoritmos em comparação com modelos paramétricos, além de sua maior flexibilidade. Esses modelos não exigem a normalização das features, nem demandam atenção especial à correlação entre as variáveis preditoras, entre outros pré-requisitos comuns em outras abordagens. Para a abordagem de classificação, foi utilizada a validação cruzada estratificada, considerando o desbalanceamento da variável *target*. Essa técnica garante que a proporção das classes seja preservada em cada divisão, proporcionando uma avaliação mais consistente e representativa do desempenho do modelo. Por fim, foi avaliado técnicas de balanceamento de dados como *Oversampling*, *Undersampling* e *SMOTE (Synthetic Minority Over-sampling Technique)*
+
+Nesse *step*, utilizou-se tanto o [notebooks/05-Model_selection.ipynb](notebooks/05-Model_selection.ipynb) quanto o executável:
+
+```bash
+python src/models/model_selection.py
+```
 
 ## 9. *Tuning* de hiperparâmetros
 
