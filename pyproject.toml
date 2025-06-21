@@ -7,7 +7,7 @@ build-backend = "setuptools.build_meta"
 name = "CEDS-808"
 version = "0.0.1"
 authors = [
-  { name = "Leonardo Mazzamboni Colussi", email = "mazzacolussi@gmail.com" }
+  { name = "Leonardo Mazzamboni Colussi", email = "leonardo.colussi.20836@ga.ita.br" }
 ]
 description = "Trabalho final da disciplina CEDS808-ITA"
 
