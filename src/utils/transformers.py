@@ -61,7 +61,6 @@ class BuildFeatures(BaseEstimator, TransformerMixin):
         return X
 
     def build_features(self, X: pd.DataFrame) -> pd.DataFrame:
-        X = X.copy()
 
         X["quarter"] = X["month"].apply(get_quarter)
         X["contacts_tendency"] = X.apply(lambda x: calc_contacts_tendency(x["campaign"], x["previous"]), axis=1)
