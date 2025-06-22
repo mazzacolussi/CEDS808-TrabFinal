@@ -2,7 +2,7 @@
 
 Este projeto é referente ao trabalho final da disciplina 808 (Aprendizado de Máquina) do *Curso de Especialização em Data Science* (CEDS-ITA), ministrado pela professora Dra. Lilian Berton. Assim, o principal objetivo é realizar um desenvolvimento completo de um processo de modelagem de um *dataset* escolhido arbritariamente pelo aluno, seguindo alguns critérios pré-definidos na atividade.
 
-Então, o *dataset* escolhido foi o [*Bank Marketing*](https://archive.ics.uci.edu/dataset/222/bank+marketing) que se enquadra no contexto de mercado de crédito, em específico uma campanha de *marketing* de um banco português, cujo objetivo é avaliar se um determinado cliente é propenso a realizar um depósito a prazo. A solução a seguir abrange todo o processo, desde o pré-processamento dos dados, análise descritiva, criação e seleção de *features*, separação dos conjuntos para treinamento de modelos, avaliação de técnicas de desbalanceamento de dados, validação cruzada, até a construção dos artefatos necessários para um eventual *deploy* em produção.
+Então, o *dataset* escolhido foi o [*Bank Marketing*](https://www.kaggle.com/datasets/henriqueyamahata/bank-marketing) que se enquadra no contexto de mercado de crédito, em específico uma campanha de *marketing* de um banco português, cujo objetivo é avaliar se um determinado cliente é propenso a realizar um depósito a prazo. A solução a seguir abrange todo o processo, desde o pré-processamento dos dados, análise descritiva, criação e seleção de *features*, separação dos conjuntos para treinamento de modelos, avaliação de técnicas de desbalanceamento de dados, validação cruzada, até a construção dos artefatos necessários para um eventual *deploy* em produção.
 
 Sendo assim, este trabalho consiste em desenvolver um modelo capaz de classificar se um cliente, após ser contatado por meio da campanha de marketing direto, aceitará ou não a oferta do novo produto de Mercado Crédito por meio de modelos de aprendizado de máquina. 
 
@@ -70,7 +70,7 @@ python src/features/create_encoder.py
 
 Os modelos *baseline* propostos nesta etapa foram: *Decision Tree*, *Random Forest*, *Gradient Boosting Trees*, *AdaBoost*, *XGBoost* e *LightGBM*. Essas escolhas foram feitas devido ao desempenho superior desses algoritmos em comparação com modelos paramétricos, além de sua maior flexibilidade. Esses modelos não exigem a normalização das features, nem demandam atenção especial à correlação entre as variáveis preditoras, entre outros pré-requisitos comuns em outras abordagens. Para a abordagem de classificação, foi utilizada a validação cruzada estratificada, considerando o desbalanceamento da variável *target*. Essa técnica garante que a proporção das classes seja preservada em cada divisão, proporcionando uma avaliação mais consistente e representativa do desempenho do modelo. Por fim, foi avaliado técnicas de balanceamento de dados como *Oversampling*, *Undersampling* e *SMOTE (Synthetic Minority Over-sampling Technique)*
 
-Nesse *step*, utilizou-se tanto o [notebooks/05-Model_selection.ipynb](notebooks/05-Model_selection.ipynb) quanto o executável:
+Nesse *step*, utilizou-se tanto o [notebooks/04-Model_selection.ipynb](notebooks/04-Model_selection.ipynb), quanto o executável:
 
 ```bash
 python src/models/model_selection.py
