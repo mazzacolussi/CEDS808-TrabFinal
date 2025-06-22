@@ -14,7 +14,7 @@ warnings.filterwarnings('ignore')
 def main(input_dataset_name, output_dataset_name):
     logger = logging.getLogger(__name__)
 
-    logger.info('Iniciando a criação da base interim.')
+    logger.info('Iniciando a criação da base processada.')
 
     logger.info('Leitura da base raw.')
     df = pd.read_csv(os.path.join('data', 'raw', input_dataset_name), sep=";")
